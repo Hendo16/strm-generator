@@ -1,0 +1,11 @@
+﻿@model HomeIndexViewModel
+
+<form asp-controller="Generate" asp-action="Parse" method="get">
+    <div>
+        <label>Please enter Playlist URL:</label>
+        <input asp-for="playlist_link" />
+    </div>
+    <div>
+        <input type="submit" value="Submit"/>
+    </div>
+</form>

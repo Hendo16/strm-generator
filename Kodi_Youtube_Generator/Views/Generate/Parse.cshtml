@@ -1,0 +1,38 @@
+﻿@model HomeParseViewModel
+
+<ol class='simple_with_animation vertical' id="parent"></ol>
+<form asp-controller="Generate" asp-action="Parse" method="post">
+    <input asp-for="id_list" type="hidden" id="idlist"/>
+    <input type="submit" value="Send" onclick="test()" />
+</form>
+<script>
+    $(function () {
+        $("ol.example").sortable();
+    });
+$(document).ready(function () {
+    var bee = @Html.Raw(Json.Serialize(Model.video_list));
+    console.log(bee);
+    var head = document.getElementById("parent");
+    generate();
+    function generate()
+    {
+        for (var i = 0; i < bee.length; i++) {
+            var entry = document.createElement("li");
+            entry.className = "well span2 title";
+            entry.innerText = bee[i].snippet.title;
+            entry.id = bee[i].snippet.resourceId.videoId;
+            head.appendChild(entry);
+        }
+    };
+
+    });
+    function test() {
+    var list = document.getElementById("parent").getElementsByTagName("li");
+    var arrayids = [];
+    for (var i = 0; i < list.length; i++) {
+        arrayids.push(list[i].id);
+        }
+    $("#idlist").val(JSON.stringify(arrayids));
+    console.log(JSON.stringify(arrayids));
+}
+</script>
